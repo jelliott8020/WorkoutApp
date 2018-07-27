@@ -1,5 +1,5 @@
 package hypertrophy;
 
-public class Legs2 {
+public class Legs2 extends Hyper  {
 
 }

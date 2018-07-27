@@ -1,4 +1,4 @@
-package running;
+package endurance;
 
 
 /**
@@ -16,13 +16,13 @@ package running;
  *
  */
 
-public abstract class Running {
+public abstract class Endurance {
 
 	double distance;
 	int intervals;
 	double speed;
 	boolean hills;
 	
-	public abstract Running running();
+	public abstract Endurance running();
 	
 }

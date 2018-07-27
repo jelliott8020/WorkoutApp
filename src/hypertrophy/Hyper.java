@@ -1,5 +1,6 @@
 package hypertrophy;
 
-public class Hyper {
+public abstract class Hyper {
 
+	
 }

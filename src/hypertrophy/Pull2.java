@@ -1,5 +1,5 @@
 package hypertrophy;
 
-public class Pull2 {
+public class Pull2 extends Hyper  {
 
 }

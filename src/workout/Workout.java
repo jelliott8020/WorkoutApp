@@ -1,8 +1,8 @@
 package workout;
 
 import barbell.Barbell;
+import endurance.Endurance;
 import metcons.MetCon;
-import running.Running;
 
 /**
  * 
@@ -17,13 +17,13 @@ public class Workout {
 
 	MetCon metCon;
 	Barbell barbell;
-	Running running;
+	Endurance running;
 	
 	public Workout() {
 		
 	}
 	
-	public Workout(MetCon mc, Barbell bb, Running run) {
+	public Workout(MetCon mc, Barbell bb, Endurance run) {
 		this.metCon = mc;
 		this.barbell = bb;
 		this.running = run;
@@ -37,7 +37,7 @@ public class Workout {
 		return barbell;
 	}
 	
-	public Running getRunning() {
+	public Endurance getRunning() {
 		return running;
 	}
 	
@@ -49,7 +49,7 @@ public class Workout {
 		this.barbell = bb;
 	}
 	
-	public void setRunning(Running run) {
+	public void setRunning(Endurance run) {
 		this.running = run;
 	}
 	
