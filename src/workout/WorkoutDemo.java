@@ -14,6 +14,7 @@ import java.util.Scanner;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import barbell.*;
 import endurance.*;
@@ -55,8 +56,11 @@ public class WorkoutDemo {
 	 * Each object gets its own JSON file
 	 * 
 	 * @param args
+	 * @throws ParseException 
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
 
 		/*
 		 * 1. Ask if maxes were retested (This will be a button in Frame later)
@@ -123,7 +127,7 @@ public class WorkoutDemo {
 		
 	}
 	
-	public void currentCycle(String monthName) {
+	public void currentCycle(String monthName) throws FileNotFoundException, IOException, ParseException {
 		if (     monthName.equals("May") ||
 			     monthName.equals("June") ||
 			     monthName.equals("July") ||
@@ -137,7 +141,12 @@ public class WorkoutDemo {
 		else if (monthName.equals("March") ||
 				 monthName.equals("April")) { System.out.println("You are currently on the fat loss cycle."); }
 		
-		System.out.println("Your current cycle begain on: "); //look up cycle begin
+		System.out.println("Your current cycle begain on: "); 
+		
+		Barbell bn = new Bench();
+		Parser par = new Parser(bn);
+		System.out.println(par.getCycleStart());
+		
 		System.out.println("Your current training maxes are: "); //look up maxes
 		System.out.println("|| Bench: ");
 		System.out.println("|| Squat: ");

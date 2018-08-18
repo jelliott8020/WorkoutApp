@@ -1,5 +1,7 @@
 package barbell;
 
+import java.time.LocalDate;
+
 import workout.Workout;
 
 public class Deadlift extends Barbell {
@@ -12,6 +14,10 @@ public class Deadlift extends Barbell {
 	
 	public Deadlift() {
 		
+	}
+	
+	public LocalDate getCycleStart() {
+		return this.cycleStart;
 	}
 	
 	public double getWeight() {
@@ -32,6 +38,10 @@ public class Deadlift extends Barbell {
 	
 	public double getWendlerCalc() {
 		return this.wendlerCalc;
+	}
+	
+	public void setCycleStart(LocalDate date) {
+		this.cycleStart = date;
 	}
 	
 	public void setWeight(double wt) {
@@ -63,6 +73,5 @@ public class Deadlift extends Barbell {
 			  " Weight: " + getWeight() + " Reps: " + getReps() +
 			  " Calculated 1RM: " + getWendlerCalc();
 	}
-
 
 }

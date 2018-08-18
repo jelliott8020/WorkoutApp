@@ -1,5 +1,7 @@
 package barbell;
 
+import java.time.LocalDate;
+
 import workout.Workout;
 
 public class Squat extends Barbell {
@@ -12,6 +14,10 @@ public class Squat extends Barbell {
 	
 	public Squat() {
 		
+	}
+	
+	public LocalDate getCycleStart() {
+		return this.cycleStart;
 	}
 	
 	public double getWeight() {
@@ -32,6 +38,10 @@ public class Squat extends Barbell {
 	
 	public double getWendlerCalc() {
 		return this.wendlerCalc;
+	}
+	
+	public void setCycleStart(LocalDate date) {
+		this.cycleStart = date;
 	}
 	
 	public void setWeight(double wt) {

@@ -1,9 +1,11 @@
 package workout;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Iterator;
 import java.io.IOException;
 import java.io.Reader;
+import java.time.LocalDate;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,20 +19,23 @@ import olympics.Olympics;
 
 public class Parser {
 	
+	JSONArray amrapPRs;
+	JSONParser parser;
+	Object obj;
+	JSONObject jsonObject;
+	Barbell bb;
+	
 	public Parser(Barbell bb) {
-		
+		this.bb = bb;
 	}
 	
-
 	public JSONArray getArray(String in) {
-
-		JSONArray amrapPRs = null;
 
 		if (in.equals("bench")) {
 			try {
-				JSONParser parser = new JSONParser();
-				Object obj = parser.parse(new FileReader("C:\\Users\\Josh\\Desktop\\WorkoutApp\\BenchPRs.txt"));
-				JSONObject jsonObject = (JSONObject) obj;
+				//JSONParser parser = new JSONParser();
+				obj = parser.parse(new FileReader("C:\\Users\\Josh\\Desktop\\WorkoutApp\\Bench.txt"));
+				jsonObject = (JSONObject) obj;
 				amrapPRs = (JSONArray) jsonObject.get("AMRAPs");
 			}
 			catch (Exception e) {
@@ -39,9 +44,9 @@ public class Parser {
 		}
 		else if (in.equals("squat")) {
 			try {
-				JSONParser parser = new JSONParser();
-				Object obj = parser.parse(new FileReader("C:\\Users\\Josh\\Desktop\\WorkoutApp\\SquatPRs.txt"));
-				JSONObject jsonObject = (JSONObject) obj;
+				//JSONParser parser = new JSONParser();
+				obj = parser.parse(new FileReader("C:\\Users\\Josh\\Desktop\\WorkoutApp\\Squat.txt"));
+				jsonObject = (JSONObject) obj;
 				amrapPRs = (JSONArray) jsonObject.get("AMRAPs");
 			}
 			catch (Exception e) {
@@ -50,9 +55,9 @@ public class Parser {
 		}
 		else if (in.equals("deadlift")) {
 			try {
-				JSONParser parser = new JSONParser();
-				Object obj = parser.parse(new FileReader("C:\\Users\\Josh\\Desktop\\WorkoutApp\\DeadliftPRs.txt"));
-				JSONObject jsonObject = (JSONObject) obj;
+				//JSONParser parser = new JSONParser();
+				obj = parser.parse(new FileReader("C:\\Users\\Josh\\Desktop\\WorkoutApp\\Deadlift.txt"));
+				jsonObject = (JSONObject) obj;
 				amrapPRs = (JSONArray) jsonObject.get("AMRAPs");
 			}
 			catch (Exception e) {
@@ -61,9 +66,9 @@ public class Parser {
 		}
 		else if (in.equals("ohp")) {
 			try {
-				JSONParser parser = new JSONParser();
-				Object obj = parser.parse(new FileReader("C:\\Users\\Josh\\Desktop\\WorkoutApp\\OHPPRs.txt"));
-				JSONObject jsonObject = (JSONObject) obj;
+				//JSONParser parser = new JSONParser();
+				obj = parser.parse(new FileReader("C:\\Users\\Josh\\Desktop\\WorkoutApp\\OHP.txt"));
+				jsonObject = (JSONObject) obj;
 				amrapPRs = (JSONArray) jsonObject.get("AMRAPs");
 			}
 			catch (Exception e) {
@@ -73,11 +78,18 @@ public class Parser {
 
 		return amrapPRs;
 	}
+	
+	public LocalDate getCycleStart() throws FileNotFoundException, IOException, ParseException {
+		obj = parser.parse(new FileReader("C:\\Users\\Josh\\Desktop\\WorkoutApp\\Bench.txt"));
+		jsonObject = (JSONObject) obj;
+		LocalDate date = (LocalDate) jsonObject.get("Cycle Start Date");
+		return date;
+	}
 
 	@SuppressWarnings("unchecked")
 	public void readBenchPR() {
-		JSONArray amrapPRs = getArray("bench");
-		Iterator<PR> iterator = amrapPRs.iterator();
+		amrapPRs = getArray("bench");
+		Iterator<Barbell> iterator = amrapPRs.iterator();
 
 		System.out.println("Bench PRs:\n");
 
@@ -89,8 +101,8 @@ public class Parser {
 
 	@SuppressWarnings("unchecked")
 	public void readSquatPR() {
-		JSONArray amrapPRs = getArray("squat");
-		Iterator<PR> iterator = amrapPRs.iterator();
+		amrapPRs = getArray("squat");
+		Iterator<Barbell> iterator = amrapPRs.iterator();
 
 		System.out.println("Squat PRs:\n");
 
@@ -102,8 +114,8 @@ public class Parser {
 
 	@SuppressWarnings("unchecked")
 	public void readDLPR() {
-		JSONArray amrapPRs = getArray("deadlift");
-		Iterator<PR> iterator = amrapPRs.iterator();
+		amrapPRs = getArray("deadlift");
+		Iterator<Barbell> iterator = amrapPRs.iterator();
 
 		System.out.println("Deadlift PRs:\n");
 
@@ -115,8 +127,8 @@ public class Parser {
 
 	@SuppressWarnings("unchecked")
 	public void readOHPPR() {
-		JSONArray amrapPRs = getArray("ohp");
-		Iterator<PR> iterator = amrapPRs.iterator();
+		amrapPRs = getArray("ohp");
+		Iterator<Barbell> iterator = amrapPRs.iterator();
 
 		System.out.println("OHP PRs:\n");
 
@@ -127,16 +139,24 @@ public class Parser {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void addBenchPR(PR input) {
+	public void addBenchPR(Barbell input) {
 		
-		JSONArray amrapPRs = getArray("bench");
-
+		amrapPRs = getArray("bench");
 		amrapPRs.add(input);
 		
-		JSONParser parser = new JSONParser();
-		Object obj = parser.parse(new FileReader("C:\\Users\\Josh\\Desktop\\WorkoutApp\\BenchPRs.txt"));
-		JSONObject jsonObject = (JSONObject) obj;
-		amrapPRs = (JSONArray) jsonObject.get("AMRAPs");
+		try {
+			parser = new JSONParser();
+			obj = parser.parse(new FileReader("C:\\Users\\Josh\\Desktop\\WorkoutApp\\BenchPRs.txt"));
+			jsonObject = (JSONObject) obj;
+			amrapPRs = (JSONArray) jsonObject.get("AMRAPs");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 
 
 	}

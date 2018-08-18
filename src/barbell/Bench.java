@@ -1,5 +1,7 @@
 package barbell;
 
+import java.time.LocalDate;
+
 public class Bench extends Barbell {
 
 	public double weight;
@@ -7,9 +9,14 @@ public class Bench extends Barbell {
 	public String date;
 	public String set;
 	public double wendlerCalc;
+	public LocalDate cycleStart;
 	
 	public Bench() {
 		
+	}
+	
+	public LocalDate getCycleStart() {
+		return this.cycleStart;
 	}
 	
 	public double getWeight() {
@@ -30,6 +37,10 @@ public class Bench extends Barbell {
 	
 	public double getWendlerCalc() {
 		return this.wendlerCalc;
+	}
+	
+	public void setCycleStart(LocalDate date) {
+		this.cycleStart = date;
 	}
 	
 	public void setWeight(double wt) {
