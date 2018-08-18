@@ -2,15 +2,15 @@ package workout;
 
 import barbell.Barbell;
 import endurance.Endurance;
+import hypertrophy.Hyper;
 import metcons.MetCon;
+import misc.Misc;
+import olympics.Olympics;
 
 /**
  * 
  * @author Josh
- * @version 7/26/18
- * 
- * Will need to ask user what their PRs for barbell lifts are.
- * Need to use Wendler's calculator to determine 1rms. 
+ * @version 7/26/18 
  *
  */
 public class Workout {
@@ -18,15 +18,25 @@ public class Workout {
 	MetCon metCon;
 	Barbell barbell;
 	Endurance running;
+	Hyper hyper;
+	Olympics oly;
+	Misc abs;
 	
-	public Workout() {
-		
+	
+	public Workout(Olympics oly, Barbell bb, MetCon mc) {
+		this.oly = oly;
+		this.barbell = bb;
+		this.metCon = mc;
 	}
 	
-	public Workout(MetCon mc, Barbell bb, Endurance run) {
-		this.metCon = mc;
-		this.barbell = bb;
+	public Workout(Endurance run) {
 		this.running = run;
+	}
+	
+	
+	public Workout(MetCon mc, Misc ab) {
+		this.metCon = mc;
+		this.abs = ab;
 	}
 	
 	public MetCon getMetCon() {
@@ -53,5 +63,8 @@ public class Workout {
 		this.running = run;
 	}
 	
+	public String toString() {
+		return "";
+	}
 	
 }

@@ -19,8 +19,6 @@ public abstract class Barbell {
 	public int sets;
 	public boolean prSet; //last set of wendler to try amrap
 	
-	public abstract Barbell barbell();
-	
 	
 
 }
