@@ -144,7 +144,7 @@ public class WorkoutDemo {
 		System.out.println("Your current cycle begain on: "); 
 		
 		Barbell bn = new Bench();
-		Parser par = new Parser(bn);
+		ParserClass par = new ParserClass(bn);
 		System.out.println(par.getCycleStart());
 		
 		System.out.println("Your current training maxes are: "); //look up maxes

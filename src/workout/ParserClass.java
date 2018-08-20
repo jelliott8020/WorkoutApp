@@ -2,6 +2,8 @@ package workout;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.io.IOException;
 import java.io.Reader;
@@ -17,7 +19,7 @@ import metcons.MetCon;
 import olympics.Olympics;
 
 
-public class Parser {
+public class ParserClass {
 	
 	JSONArray amrapPRs;
 	JSONParser parser;
@@ -25,8 +27,20 @@ public class Parser {
 	JSONObject jsonObject;
 	Barbell bb;
 	
-	public Parser(Barbell bb) {
+	public ParserClass(Barbell bb) {
 		this.bb = bb;
+	}
+	
+	public ParserClass() {
+		amrapPRs = new JSONArray();
+		parser = new JSONParser();
+		jsonObject = new JSONObject();
+		obj = new Object();
+	}
+	
+	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
+		ParserClass par = new ParserClass();
+		par.getCycleStart();
 	}
 	
 	public JSONArray getArray(String in) {
@@ -79,11 +93,60 @@ public class Parser {
 		return amrapPRs;
 	}
 	
-	public LocalDate getCycleStart() throws FileNotFoundException, IOException, ParseException {
-		obj = parser.parse(new FileReader("C:\\Users\\Josh\\Desktop\\WorkoutApp\\Bench.txt"));
-		jsonObject = (JSONObject) obj;
-		LocalDate date = (LocalDate) jsonObject.get("Cycle Start Date");
-		return date;
+	public void getCycleStart() throws FileNotFoundException, IOException, ParseException {
+				
+		try {
+			obj = parser.parse(new FileReader("D:\\WorkoutApp\\test.json"));
+			jsonObject = (JSONObject) obj;
+			String name = (String) jsonObject.get("name");
+			System.out.println(name);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		/*
+		JSONParser par = new JSONParser();
+		
+		try {
+			Object ob2 = par.parse(new FileReader("D:\\WorkoutApp\\test.json"));
+			JSONObject ob3 = (JSONObject) ob2;
+			String name = (String) ob3.get("name");
+			System.out.println(name);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		*/
+	}
+	
+	
+	
+	public void writeTest() {
+		JSONObject ob = new JSONObject();
+		ob.put("name", "josh");
+		ob.put("age", new Integer(100));
+		
+		JSONArray list = new JSONArray();
+		list.add("msg 1");
+		list.add("Test2");
+		
+		ob.put("Tests", list);
+		
+		try (FileWriter file = new FileWriter("C:\\Users\\Josh\\Desktop\\WorkoutApp\\test.json")) {
+			file.write(ob.toJSONString());
+			file.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(obj);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -160,6 +223,8 @@ public class Parser {
 
 
 	}
+	
+	
 
 }
 
